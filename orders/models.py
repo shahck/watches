@@ -49,11 +49,11 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # def full_name(self):
-    #     return f'{self.first_name} {self.last_name}'
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'
 
-    # def full_address(self):
-    #     return f'{self.address_line_1} {self.address_line_2}'
+    def full_address(self):
+        return f'{self.address_line_1} {self.address_line_2}'
 
 
     def _str_(self):
@@ -62,7 +62,7 @@ class Order(models.Model):
 
 class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    Payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
+    payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
     user = models.ForeignKey(Accounts, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     variation = models.ManyToManyField(Variation,blank=True)

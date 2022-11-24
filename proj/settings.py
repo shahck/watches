@@ -163,3 +163,7 @@ EMAIL_FROM = 'angliruskin@gmail.com'
 EMAIL_HOST_USER = 'angliruskin@gmail.com'
 EMAIL_HOST_PASSWORD = 'oewjmlimoaftvihc'
 EMAIL_USE_TLS = 'True'
+
+
+RAZOR_KEY_ID = 'rzp_test_VXRxGA8AVNxuMX'
+RAZOR_KEY_SECRET = 'BphmbyV3Q5xLtw2REr6rtXFo'
