@@ -56,15 +56,15 @@ def payment(request, total=0):
 
     
   context = {
-    'order': order,
-    'cart_items': cart_item,
-    'total': total,
-    'tax': tax,
-    'grand_total': grand_total,
-    
-    'payment': response_payment,
-    'razorpay_merchant_key':settings.RAZOR_KEY_ID,
-    'grand_total': grand_total,
+      'order': order,
+      'cart_items': cart_item,
+      'total': total,
+      'tax': tax,
+      'grand_total': grand_total,
+      
+      'payment': response_payment,
+      'razorpay_merchant_key':settings.RAZOR_KEY_ID,
+      'grand_total': grand_total,
   }
   return render(request, 'orders/payment.html', context)
 
@@ -158,7 +158,7 @@ def payment_success(request):
         for item in ordered_products:
             total += (item.product_price * item.quantity)
         
-        tax = total / 100
+        tax = (2*total ) / 100
         grand_total = total + tax
         
         #Order Confirmmation Mail
@@ -175,13 +175,12 @@ def payment_success(request):
         messages.success(request, 'Order confirmation mail has been send to your registered email address')
 
         context = {
-        'order': order,
-        'ordered_products': ordered_products,
-        'transaction_id': transaction_id,
-        
-        'total': total,
-        'tax': tax,
-        'grand_total': grand_total
+            'order': order,
+            'ordered_products': ordered_products,
+            'transaction_id': transaction_id,
+            'total': total,
+            'tax': tax,
+            'grand_total': grand_total
         }
         
         return render(request, 'orders/success.html', context)

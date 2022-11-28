@@ -38,10 +38,12 @@
                                     <label>Phone Number</label>
                                     {{user_form.phone_number}}
                                 </div>
+                                {% comment %} {% if userprofile.profilepicture %} {% endcomment %}
                                 <div class="form-group col-md-6">
                                     <label>Profile Picture</label>
                                     {{profile_form.profile_picture}}
                                 </div>
+                                {% comment %} {% endif %} {% endcomment %}
                             </div>
                             <div class="form-group">
                                 <label>Address Line 1</label>

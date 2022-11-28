@@ -8,16 +8,16 @@
       <div class="collapse navbar-collapse" id="navbarTop4">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-                 <a href="#" class="nav-link">   English </a>
+                 <!-- <a href="#" class="nav-link">   English </a> -->
                 
             </li>
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link"> USD </a>
+                <!-- <a href="#" class="nav-link"> USD </a> -->
             </li>
         </ul>
         <ul class="navbar-nav">
-            <li><a href="#" class="nav-link"> <i class="fa fa-envelope"></i> Email </a></li>
-            <li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Call us </a></li>
+            <!-- <li><a href="#" class="nav-link"> <i class="fa fa-envelope"></i> Email </a></li> -->
+            <!-- <li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Call us </a></li> -->
        </ul>  <!-- list-inline //  -->
       </div>   <!-- navbar-collapse .// -->
     </div>  <!-- container //  -->
@@ -119,11 +119,16 @@
                            {% else %}
                              <div class="widget-header">
                                   <small class="title text-muted">Welcome {{user.first_name }}</small>
-                                  <div> 
-                                      <a href="{% url 'dashboard' %}" class="text-info">Dashboard</a> <span class="dark-transp"> | </span> 
+                                  <div>
+                                    {% if user.is_admin %} 
+                                      <a href="{% url 'manager_dashboard' %}" class="text-info">Dashboard</a> <span class="dark-transp"> | </span>
+                                      <a href="{% url 'logout' %}" class="text-info"> Logout</a>
+                                    {% else %}
+                                      <a href="{% url 'dashboard' %}" class="text-info">Dashboard</a> <span class="dark-transp"> | </span>
                                       <a href="{% url 'logout' %}" class="text-info"> Logout</a>
                                   </div>
                               </div>
+                              {% endif %}
                               {% endif %}
                               <a href="{% url 'cart' %}" class="widget-header pl-6 ml-3 text-info">
                                   <div class="icon icon-sm"><i class="fa fa-shopping-cart mt-3"></i>

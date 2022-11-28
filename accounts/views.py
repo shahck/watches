@@ -5,6 +5,10 @@ from .models import Accounts, UserProfile
 from .forms import RegistrationForm, UserForm, UserprofileForm 
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+
+from django.db.models import Q 
+
 
 #  verification email
 from django.contrib.sites.shortcuts import get_current_site
@@ -131,7 +135,7 @@ def login(request):
                     nextPage = params['next']
                     return redirect(nextPage)
             except:
-                return redirect('dashboard')
+                return redirect('home')
         else:
             messages.error(request, 'Invalid login credentials')
             return redirect('login')
@@ -176,14 +180,14 @@ def dashboard(request):
     orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
     orders_count = orders.count()
     check = UserProfile.objects.filter(user_id=request.user.id)
-    if len(check)>0:
-        userprofile = UserProfile.objects.get(user_id=request.user.id)
-        context = {
-                'orders_count' : orders_count,
-                'userprofile' : userprofile,
-            }
-        return render(request, 'accounts/dashboard.html', context)
-    return render(request, 'accounts/dashboard.html')
+    
+    userprofile = UserProfile.objects.get(user_id=request.user.id)
+    context = {
+            'orders_count' : orders_count,
+            'userprofile' : userprofile,
+        }
+    return render(request, 'accounts/dashboard.html', context)
+    
 
 
 
@@ -316,19 +320,53 @@ def change_password(request):
 def order_detail(request,order_id):
     order_detail = OrderProduct.objects.filter(order__order_number=order_id)
     order = Order.objects.get(order_number=order_id)
-    # total = 0
-    # tax = 0
+    total = 0
+    tax = 0
     subtotal = 0
     for i in order_detail:
         subtotal += i.product_price * i.quantity
         
-    # tax = 2*total / 100
-    # grand_total = total + tax
+    tax = (2*total) / 100
+    grand_total = total + tax
     context = {
         'order_detail':order_detail,
         'order':order,
-        # 'total':total,
-        # 'tax':tax,
+        'total':total,
+        'tax':tax,
         'subtotal':subtotal
     }
     return render(request,'accounts/order_detail.html',context)
+
+
+def user_manage_order(request):
+      if request.user.is_admin:
+            if request.method == 'POST':
+                keyword = request.POST['keyword']
+                orders = Order.objects.filter(Q(is_ordered=True), Q(order_number__icontains=keyword) | Q(user__email__icontains=keyword) | Q(firstname__icontains=keyword) | Q(lastname__icontains=keyword)).order_by('-order_number')
+    
+            else:
+                orders = Order.objects.filter(is_ordered=True).order_by('-order_number')
+      
+            paginator = Paginator(orders, 10)
+            page = request.GET.get('page')
+            paged_orders = paginator.get_page(page)
+            context = {
+            'orders': paged_orders
+            }
+            return render(request, 'accounts/my_orders.html', context)
+  
+      else:
+            return redirect('home')
+
+
+
+@login_required(login_url='login')
+def user_cancel_order(request, order_number):
+    order = Order.objects.get(order_number=order_number)
+    order.status = 'Cancelled'
+    order.save()
+        
+    return render(request, 'accounts/cancel_message.html')
+  
+       
+
