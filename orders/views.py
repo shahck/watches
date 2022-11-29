@@ -146,7 +146,7 @@ def payment_success(request):
         order = Order.objects.get(order_number=order_number, is_ordered=True)
         
         # Change order status to Accepted when order is success
-        order.status = 'Accepted'
+        order.status = 'Order Accepted'
         order.save()
         
         ordered_products = OrderProduct.objects.filter(order_id=order.id)

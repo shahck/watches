@@ -363,7 +363,7 @@ def user_manage_order(request):
 @login_required(login_url='login')
 def user_cancel_order(request, order_number):
     order = Order.objects.get(order_number=order_number)
-    order.status = 'Cancelled'
+    order.status = 'Order Cancelled'
     order.save()
         
     return render(request, 'accounts/cancel_message.html')

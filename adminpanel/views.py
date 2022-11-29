@@ -189,7 +189,7 @@ def manage_order(request):
 def cancel_order(request, order_number):
   if request.user.is_admin:
     order = Order.objects.get(order_number=order_number)
-    order.status = 'Cancelled'
+    order.status = 'Order Cancelled'
     order.save()
     
     return redirect('manage_order')
@@ -205,7 +205,7 @@ def cancel_order(request, order_number):
 def accept_order(request, order_number):
   if request.user.is_admin:
     order = Order.objects.get(order_number=order_number)
-    order.status = 'Accepted'
+    order.status = 'Order Accepted'
     order.save()
     
     return redirect('manage_order')
@@ -221,7 +221,7 @@ def accept_order(request, order_number):
 def complete_order(request, order_number):
   if request.user.is_admin:
     order = Order.objects.get(order_number=order_number)
-    order.status = 'Completed'
+    order.status = 'Delivered Successfully'
     order.save()
     
     return redirect('manage_order')
