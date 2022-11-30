@@ -157,14 +157,14 @@ MESSAGE_TAGS = {
 
 
 # SMTP configuration 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'djangoe'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_FROM = 'shaheenck0627@gmail.com'
-EMAIL_HOST_USER = 'shaheenck0627@gmail.com'
-EMAIL_HOST_PASSWORD = 'eiurvjdxwmdqqgop'
+EMAIL_FROM = '@gmail.com'
+EMAIL_HOST_USER = '@gmail.com'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = 'True'
 
 
-RAZOR_KEY_ID = 'rzp_test_VXRxGA8AVNxuMX'
-RAZOR_KEY_SECRET = 'BphmbyV3Q5xLtw2REr6rtXFo'
+RAZOR_KEY_ID = ''
+RAZOR_KEY_SECRET = ''
