@@ -121,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Calcutta'
 
 USE_I18N = True
 
@@ -160,11 +160,11 @@ MESSAGE_TAGS = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_FROM = 'EMAIL_FROM'
-EMAIL_HOST_USER = 'EMAIL_HOST_USER'
-EMAIL_HOST_PASSWORD = 'EMAIL_HOST_PASSWORD'
+EMAIL_FROM = 'shaheenck0627@gmail.com'
+EMAIL_HOST_USER = 'shaheenck0627@gmail.com'
+EMAIL_HOST_PASSWORD = 'eiurvjdxwmdqqgop'
 EMAIL_USE_TLS = 'True'
 
 
-RAZOR_KEY_ID = 'RAZOR_KEY_ID'
-RAZOR_KEY_SECRET = 'RAZOR_KEY_SECRET'
+RAZOR_KEY_ID = 'rzp_test_VXRxGA8AVNxuMX'
+RAZOR_KEY_SECRET = 'BphmbyV3Q5xLtw2REr6rtXFo'

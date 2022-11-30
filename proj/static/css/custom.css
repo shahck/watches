@@ -13,7 +13,7 @@
 }
 
 /* Showing the stars */
-.rate > label::before{
+.rate > label:before{
     display: inline-block;
     font-size: 1.1rem;
     font-family: FontAwesome;
@@ -24,7 +24,7 @@
 }
 
 /* Half stars */
-.rate .half::before{
+.rate .half:before{
     content: "\f089";
     position: absolute;
     padding-right: 0;
@@ -41,7 +41,11 @@ label:hover ~ input:checked ~ label{
     color : #cc9000
 }
 
-/* ul.thumb{
+.rating-star i{
+    color: #ffb503 !important; 
+}
+
+ul.thumb{
     margin:0 auto;
     padding: 0;
     float: left;
@@ -54,4 +58,4 @@ ul.thumb li img{
     width: 80px;
     height: 80px;
     border: 1px solid grey;
-} */
+}

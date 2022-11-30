@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, ReviewRating #, ProductGallery, 
+from .models import Product, ReviewRating, ProductGallery
 from store.forms import ReviewForm
 from category.models import Category
 from cart.models import CartItem
@@ -9,9 +9,9 @@ from django.db.models import Q
 from django.contrib import messages
 
 from django.http import HttpResponse
-# from .forms import ReviewForm
-# from django.contrib import messages
-# from orders.models import OrderProduct
+from store.forms import ReviewForm
+from django.contrib import messages
+from orders.models import OrderProduct
 
 # Create your views here.
 
@@ -51,26 +51,26 @@ def product_details(request, category_slug, product_slug):
     except Exception as e:
         raise e
     
-    # if request.user.is_authenticated:
-    #     try:
-    #         orderproduct = OrderProduct.objects.filter(user=request.user, product_id=single_product.id).exists()
-    #     except OrderProduct.DoesNotExist:
-    #         orderproduct = None
-    # else:
-    #     orderproduct = None
+    if request.user.is_authenticated:
+        try:
+            orderproduct = OrderProduct.objects.filter(user=request.user, product_id=single_product.id).exists()
+        except OrderProduct.DoesNotExist:
+            orderproduct = None
+    else:
+        orderproduct = None
         
-    # # Get the reviews
-    # reviews = ReviewRating.objects.filter(product_id=single_product.id,status=True)
+    # Get the reviews
+    reviews = ReviewRating.objects.filter(product_id=single_product.id,status=True)
     
-    # #get the product gallery
-    # product_gallery =ProductGallery.objects.filter(product_id=single_product.id) 
+    #get the product gallery
+    product_gallery =ProductGallery.objects.filter(product_id=single_product.id) 
     
     context = { 
         'single_product': single_product,
         'in_cart':in_cart,
-    #     'orderproduct':orderproduct,
-    #     'reviews':reviews,
-    #     'product_gallery':product_gallery,
+        'orderproduct':orderproduct,
+        'reviews':reviews,
+        'product_gallery':product_gallery,
     }
     return render(request, 'store/product_detail.html', context)
 
@@ -86,6 +86,7 @@ def search(request):
         'product_count':product_count,
     }
     return render(request, 'store/store.html', context)  
+
 
 
 def submit_review(request,product_id):
